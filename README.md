@@ -3,397 +3,534 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مبادرة التميز لقراءة الأعداد 🏅</title>
-    <script src="https://cdn.jsdelivr.net/npm/n2words/n2words.min.js"></script>
-
+    <title>مبادرة التميُّز - تحسين قراءة الأعداد</title>
     <style>
-        /* CSS للتصميم الجذاب والألوان الأنثوية المحسنة */
-        :root {
-            --primary-color: #ff69b4; /* وردي ساخن (Hot Pink) */
-            --secondary-color: #ffb6c1; /* وردي فاتح (Light Pink) */
-            --accent-color: #9370db; /* بنفسجي متوسط (Medium Purple) */
-            --success-color: #3cb371; /* أخضر نضارة */
-            --error-color: #dc143c; /* أحمر كرزي */
-            --text-color: #4a4a4a;
-            --bg-color: #fff0f5; /* خلفية وردية فاتحة جدًا */
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100%;
         }
 
-        body {
-            font-family: 'Arial', sans-serif; 
-            background: linear-gradient(135deg, var(--bg-color) 0%, #faeef8 100%);
-            color: var(--text-color);
-            text-align: center;
-            padding: 20px;
-            direction: rtl;
+        html {
+            height: 100%;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: white;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
             padding: 30px;
-            border-radius: 30px; 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            border: 8px solid var(--primary-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* تزيين Container بنقاط مبهجة */
-        .container::before {
-            content: "✨";
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 2em;
-            opacity: 0.5;
-        }
-        .container::after {
-            content: "💖";
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 2em;
-            opacity: 0.5;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 3em;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 5px var(--secondary-color);
-        }
-
-        h2 {
-            color: var(--accent-color);
-            font-size: 2em;
+        .header {
+            text-align: center;
             margin-bottom: 30px;
-            border-bottom: 4px solid var(--secondary-color);
-            padding-bottom: 10px;
-            display: inline-block;
         }
 
-        .input-group {
-            margin: 25px 0;
+        .title {
+            color: #d63384;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #6f42c1;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #fff0f6, #fce4ec);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(214, 51, 132, 0.15);
+            border: 2px solid #f8bbd9;
+        }
+
+        .input-section {
             display: flex;
-            flex-direction: column;
+            gap: 15px;
             align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        input[type="text"] {
-            padding: 18px;
-            font-size: 2em;
-            width: 90%;
-            max-width: 450px;
-            border: 5px solid var(--secondary-color);
+        .number-input {
+            font-size: 1.8rem;
+            padding: 15px 20px;
+            border: 3px solid #f8bbd9;
             border-radius: 15px;
             text-align: center;
-            margin-bottom: 20px;
-            color: var(--accent-color);
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        input[type="text"]:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px var(--primary-color);
-            outline: none;
-        }
-
-        button {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin: 8px;
-            transition: background-color 0.3s ease, transform 0.1s, box-shadow 0.3s;
-            box-shadow: 0 6px var(--primary-color);
-        }
-
-        button:hover {
-            background-color: #a893e2; 
-        }
-
-        button:active {
-            transform: translateY(3px);
-            box-shadow: 0 3px var(--primary-color);
-        }
-
-        .microphone-btn {
-            background-color: var(--primary-color);
-            box-shadow: 0 6px #ff3399;
-            font-size: 1.5em;
             min-width: 300px;
-            margin-top: 20px;
+            background: white;
+            color: #d63384;
+            font-weight: bold;
         }
 
-        .microphone-btn:hover {
-            background-color: #ff3399;
+        .number-input:focus {
+            outline: none;
+            border-color: #d63384;
+            box-shadow: 0 0 15px rgba(214, 51, 132, 0.3);
         }
 
-        .result-area {
-            min-height: 100px;
-            margin-top: 30px;
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #d63384, #e91e63);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #6f42c1, #8e44ad);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #20c997, #28a745);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .mic-section {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .mic-btn {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .mic-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .mic-btn.recording {
+            background: linear-gradient(45deg, #dc3545, #e74c3c);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .result-section {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .student-answer {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 15px;
             padding: 20px;
-            border: 4px dashed var(--secondary-color);
-            background-color: #fcfcfc;
-            border-radius: 20px;
-            font-size: 1.5em;
+            margin: 15px 0;
+            font-size: 1.3rem;
+            color: #856404;
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 1.4rem;
             font-weight: bold;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
         }
 
-        .feedback-icon {
-            font-size: 4em;
-            margin: 20px;
-            display: none;
+        .feedback.correct {
+            background: linear-gradient(145deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border: 2px solid #b8daff;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(145deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border: 2px solid #f1b0b7;
+        }
+
+        .number-display {
+            font-size: 3rem;
             font-weight: bold;
-            animation: bounce 0.5s ease-in-out;
-        }
-
-        .feedback-icon.success {
-            color: var(--success-color);
-        }
-
-        .feedback-icon.error {
-            color: var(--error-color);
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            color: #d63384;
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 3px solid #f8bbd9;
+            letter-spacing: 2px;
         }
 
         .footer {
+            text-align: center;
             margin-top: 40px;
-            padding-top: 15px;
-            border-top: 2px dashed var(--secondary-color);
-            font-size: 1.1em;
-            color: var(--accent-color);
-            font-weight: 500;
+            padding: 20px;
+            background: linear-gradient(145deg, #fce4ec, #f8bbd9);
+            border-radius: 15px;
+            color: #d63384;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .status {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #6f42c1;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .icon {
+            margin-left: 8px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏅 مبادرة التميز 🏅</h1>
-        <h2>( تحسين قراءة الأعداد في مادة الرياضيات للمرحلة الابتدائية )</h2>
-        
-        <div class="input-group">
-            <label for="numberInput" style="font-size: 1.8em; margin-bottom: 10px; color: var(--accent-color); font-weight: bold;">العدد المطلوب قراءته:</label>
-            <input type="text" id="numberInput" placeholder="أدخل رقمًا أو اضغط توليد عشوائي" maxlength="12">
-            
-            <div class="controls">
-                <button onclick="generateRandomNumber()">توليد عدد عشوائي 🎲</button>
-                <button onclick="speakNumber()" id="listenBtn">سماع القراءة الصحيحة 🎧 (مساعد جوجل)</button>
+        <header class="header">
+            <h1 class="title">🌟 مبادرة التميُّز 🌟</h1>
+            <p class="subtitle">تحسين قراءة الأعداد في مادة الرياضيات للمرحلة الابتدائية</p>
+        </header>
+
+        <div class="card">
+            <div class="input-section">
+                <input type="text" id="numberInput" class="number-input" placeholder="أدخلي الرقم هنا (حتى 12 خانة)" maxlength="12">
+                <button class="btn btn-primary" onclick="generateRandomNumber()">
+                    <span class="icon">🎲</span>
+                    توليد رقم عشوائي
+                </button>
+            </div>
+
+            <div class="number-display" id="numberDisplay">
+                أدخلي رقماً لتبدأ التمرين
             </div>
         </div>
 
-        <div class="interaction-area">
-            <button class="microphone-btn" id="recordBtn" onclick="toggleRecording()">
-                🎙️ ابدأ التحدث
-            </button>
-            
-            <p id="microphoneStatus" style="margin-top: 15px; font-size: 1.1em; color: var(--primary-color);">اضغطي على الزر لبدء التسجيل</p>
-            
-            <div class="result-area">
-                <span id="speechResult">ستظهر محاولة قراءة الطالبة (نصًا) هنا...</span>
+        <div class="card">
+            <div class="mic-section">
+                <p style="color: #d63384; font-size: 1.2rem; margin-bottom: 15px;">
+                    <span class="icon">🎤</span>
+                    اضغطي على الميكرفون واقرئي الرقم بصوت واضح
+                </p>
+                <button class="mic-btn" id="micBtn" onclick="toggleRecording()">🎤</button>
+                <div class="status" id="status">اضغطي على الميكرفون للبدء</div>
             </div>
+        </div>
+
+        <div class="card result-section" id="resultSection" style="display: none;">
+            <h3 style="color: #d63384; text-align: center;">📝 إجابتك:</h3>
+            <div class="student-answer" id="studentAnswer"></div>
             
-            <span id="successIcon" class="feedback-icon success">✅ أحسنتِ!</span>
-            <span id="errorIcon" class="feedback-icon error">❌ حاولي مجددًا</span>
+            <div class="feedback" id="feedback"></div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-success" onclick="playCorrectAnswer()">
+                    <span class="icon">🔊</span>
+                    استمعي للقراءة الصحيحة
+                </button>
+            </div>
         </div>
 
         <div class="footer">
-            تصميم أ.سميرة الزهراني
+            <p>💖 تصميم أ.سميرة الزهراني 💖</p>
         </div>
-
     </div>
 
     <script>
-        const numberInput = document.getElementById('numberInput');
-        const speechResult = document.getElementById('speechResult');
-        const recordBtn = document.getElementById('recordBtn');
-        const microphoneStatus = document.getElementById('microphoneStatus');
-        const successIcon = document.getElementById('successIcon');
-        const errorIcon = document.getElementById('errorIcon');
-        
-        let recognition = null; 
+        let recognition;
         let isRecording = false;
+        let currentNumber = '';
 
-        // --- وظائف مساعدة ---
-        
-        /**
-         * تنظيف النص للمقارنة: إزالة الفراغات الزائدة وعلامات الترقيم.
-         */
-        function normalizeArabicText(text) {
-            if (!text) return '';
-            // إزالة التشكيل (الحركات) والرموز غير المرغوب فيها
-            let normalized = text.replace(/[\u064B-\u0652\u06F0-\u06F9\u200F\u202E\.\,\!\?]/g, ''); 
-            // معاملة "و" كفاصل وإزالة الفراغات الزائدة
-            normalized = normalized.replace(/و/g, ' '); 
-            normalized = normalized.replace(/\s+/g, ' ').trim(); 
-            return normalized;
+        // تحويل الأرقام إلى كلمات عربية
+        const ones = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة'];
+        const tens = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+        const teens = ['عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+
+        function numberToArabicWords(num) {
+            if (num === '0') return 'صفر';
+            
+            const numStr = num.toString();
+            const length = numStr.length;
+            
+            if (length <= 3) {
+                return convertHundreds(parseInt(num));
+            } else if (length <= 6) {
+                const thousands = Math.floor(parseInt(num) / 1000);
+                const remainder = parseInt(num) % 1000;
+                let result = convertHundreds(thousands) + ' ألف';
+                if (remainder > 0) {
+                    result += ' ' + convertHundreds(remainder);
+                }
+                return result;
+            } else if (length <= 9) {
+                const millions = Math.floor(parseInt(num) / 1000000);
+                const remainder = parseInt(num) % 1000000;
+                let result = convertHundreds(millions) + ' مليون';
+                if (remainder > 0) {
+                    const thousands = Math.floor(remainder / 1000);
+                    const ones = remainder % 1000;
+                    if (thousands > 0) {
+                        result += ' ' + convertHundreds(thousands) + ' ألف';
+                    }
+                    if (ones > 0) {
+                        result += ' ' + convertHundreds(ones);
+                    }
+                }
+                return result;
+            } else {
+                const billions = Math.floor(parseInt(num) / 1000000000);
+                const remainder = parseInt(num) % 1000000000;
+                let result = convertHundreds(billions) + ' مليار';
+                if (remainder > 0) {
+                    const millions = Math.floor(remainder / 1000000);
+                    const thousands = Math.floor((remainder % 1000000) / 1000);
+                    const ones = remainder % 1000;
+                    if (millions > 0) {
+                        result += ' ' + convertHundreds(millions) + ' مليون';
+                    }
+                    if (thousands > 0) {
+                        result += ' ' + convertHundreds(thousands) + ' ألف';
+                    }
+                    if (ones > 0) {
+                        result += ' ' + convertHundreds(ones);
+                    }
+                }
+                return result;
+            }
         }
 
-        /**
-         * إخفاء جميع أيقونات التقييم
-         */
-        function hideFeedback() {
-            successIcon.style.display = 'none';
-            errorIcon.style.display = 'none';
-        }
-
-        // --- وظائف توليد الأرقام والقراءة ---
-        
-        /**
-         * توليد رقم عشوائي بين 1 و 999,999,999,999 (12 خانة كحد أقصى)
-         */
-        function generateRandomNumber() {
-            // توليد طول عشوائي بين 1 و 12
-            const length = Math.floor(Math.random() * 12) + 1; 
-            let randomNumString = '';
-            for (let i = 0; i < length; i++) {
-                if (i === 0 && length > 1) {
-                    randomNumString += Math.floor(Math.random() * 9) + 1; 
+        function convertHundreds(num) {
+            if (num === 0) return '';
+            
+            let result = '';
+            const hundreds = Math.floor(num / 100);
+            const remainder = num % 100;
+            
+            if (hundreds > 0) {
+                if (hundreds === 1) {
+                    result += 'مائة';
+                } else if (hundreds === 2) {
+                    result += 'مائتان';
                 } else {
-                    randomNumString += Math.floor(Math.random() * 10); 
+                    result += ones[hundreds] + ' مائة';
                 }
             }
-            if (length === 1 && randomNumString === '0') randomNumString = '1';
             
-            numberInput.value = randomNumString; 
-            hideFeedback();
-            speechResult.textContent = 'ستظهر محاولة قراءة الطالبة (نصًا) هنا...';
-        }
-        
-        /**
-         * تحويل النص إلى كلام (Text-to-Speech) - سماع القراءة الصحيحة.
-         */
-        function speakNumber() {
-            const numberToRead = numberInput.value.trim();
-            if (!numberToRead) {
-                alert("الرجاء إدخال رقم أولاً.");
-                return;
+            if (remainder > 0) {
+                if (result) result += ' ';
+                
+                if (remainder < 10) {
+                    result += ones[remainder];
+                } else if (remainder < 20) {
+                    result += teens[remainder - 10];
+                } else {
+                    const tensDigit = Math.floor(remainder / 10);
+                    const onesDigit = remainder % 10;
+                    result += tens[tensDigit];
+                    if (onesDigit > 0) {
+                        result += ' ' + ones[onesDigit];
+                    }
+                }
             }
             
-            const utterance = new SpeechSynthesisUtterance(numberToRead);
-            utterance.lang = 'ar-SA'; 
-            
-            // محاولة اختيار صوت أنثوي (لتلبية المتطلب التقني)
-            const voices = speechSynthesis.getVoices();
-            const femaleVoice = voices.find(voice => voice.lang === 'ar-SA' && (voice.name.includes('Female') || voice.name.includes('Google') || voice.name.includes('Arabic')));
-            if (femaleVoice) {
-                utterance.voice = femaleVoice;
-            } 
-            
-            speechSynthesis.speak(utterance);
-            hideFeedback();
+            return result;
         }
 
-        // --- وظائف التعرف على الكلام والتقييم التلقائي ---
-
-        /**
-         * تقييم قراءة الطالبة تلقائيًا.
-         */
-        function automaticEvaluation(studentReading) {
-            const numberValue = numberInput.value.trim();
-            
-            if (!numberValue) {
-                errorIcon.style.display = 'inline-block';
-                return;
+        function generateRandomNumber() {
+            const digits = Math.floor(Math.random() * 12) + 1;
+            let number = '';
+            for (let i = 0; i < digits; i++) {
+                if (i === 0) {
+                    number += Math.floor(Math.random() * 9) + 1;
+                } else {
+                    number += Math.floor(Math.random() * 10);
+                }
             }
+            document.getElementById('numberInput').value = number;
+            updateNumberDisplay();
+        }
 
-            let correctText = '';
-            try {
-                // تحويل الرقم إلى نص عربي باستخدام المكتبة
-                correctText = n2words(Number(numberValue), { lang: 'ar' });
-            } catch (e) {
-                correctText = "خطأ في تحويل الرقم إلى نص";
-            }
-
-            // تنظيف النصوص للمقارنة الدقيقة
-            const normalizedCorrect = normalizeArabicText(correctText);
-            const normalizedStudent = normalizeArabicText(studentReading);
+        function updateNumberDisplay() {
+            const input = document.getElementById('numberInput').value;
+            const display = document.getElementById('numberDisplay');
             
-            // المقارنة: يجب أن تكون القراءة مطابقة تمامًا.
-            if (normalizedStudent === normalizedCorrect && normalizedCorrect !== "خطأ في تحويل الرقم إلى نص") {
-                successIcon.style.display = 'inline-block';
-                errorIcon.style.display = 'none';
+            if (input && /^\d+$/.test(input) && input.length <= 12) {
+                display.textContent = input;
+                currentNumber = input;
+                document.getElementById('resultSection').style.display = 'none';
+            } else if (input.length > 12) {
+                display.textContent = 'الرقم كبير جداً! (أقصى حد 12 خانة)';
+                currentNumber = '';
             } else {
-                errorIcon.style.display = 'inline-block';
-                successIcon.style.display = 'none';
+                display.textContent = 'أدخلي رقماً صحيحاً';
+                currentNumber = '';
             }
         }
 
-        /**
-         * بدء/إيقاف التسجيل الصوتي للطالبة
-         */
-        function toggleRecording() {
-            // التحقق من دعم المتصفح لـ Web Speech API 
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                alert('عذرًا، متصفحك لا يدعم وظيفة التعرف على الكلام (مطلوبة للتقييم الآلي). يرجى استخدام متصفح محدث مثل Chrome أو Edge.');
+        function initSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+            } else if ('SpeechRecognition' in window) {
+                recognition = new SpeechRecognition();
+            } else {
+                document.getElementById('status').textContent = 'المتصفح لا يدعم التعرف على الصوت';
                 return;
+            }
+
+            recognition.lang = 'ar-SA';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = function() {
+                document.getElementById('status').textContent = '🎤 أتحدث الآن...';
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                processAnswer(transcript);
+            };
+
+            recognition.onerror = function(event) {
+                document.getElementById('status').textContent = 'حدث خطأ، حاولي مرة أخرى';
+                stopRecording();
+            };
+
+            recognition.onend = function() {
+                stopRecording();
+            };
+        }
+
+        function toggleRecording() {
+            if (!currentNumber) {
+                alert('يرجى إدخال رقم أولاً!');
+                return;
+            }
+
+            if (!recognition) {
+                initSpeechRecognition();
             }
 
             if (isRecording) {
-                if (recognition) {
-                    recognition.stop();
-                }
-                isRecording = false;
-                recordBtn.textContent = '🎙️ ابدأ التحدث';
-                microphoneStatus.textContent = 'التسجيل متوقف.';
+                recognition.stop();
             } else {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                recognition = new SpeechRecognition();
-                
-                recognition.lang = 'ar-SA'; // للتعرف على الكلام باللغة العربية الفصحى
-                recognition.interimResults = false; 
-                recognition.maxAlternatives = 1;
-                
-                recognition.onstart = () => {
-                    isRecording = true;
-                    recordBtn.textContent = '🔴 جاري الاستماع... (اضغطي للإيقاف)';
-                    microphoneStatus.textContent = 'المايكروفون مفتوح، يرجى قراءة الرقم...';
-                    speechResult.textContent = 'جاري الاستماع...';
-                    hideFeedback();
-                };
-
-                recognition.onresult = (event) => {
-                    const studentReading = event.results[0][0].transcript;
-                    speechResult.textContent = `قراءة الطالبة: "${studentReading}"`;
-                    automaticEvaluation(studentReading);
-                    toggleRecording(); 
-                };
-
-                recognition.onerror = (event) => {
-                    console.error('Speech recognition error:', event.error);
-                    microphoneStatus.textContent = `حدث خطأ: ${event.error}. تأكدي من إعطاء إذن الميكروفون.`;
-                    isRecording = false;
-                    recordBtn.textContent = '🎙️ ابدأ التحدث';
-                };
-                
-                recognition.onend = () => {
-                    if (isRecording) { 
-                        isRecording = false;
-                        recordBtn.textContent = '🎙️ ابدأ التحدث';
-                        microphoneStatus.textContent = 'التسجيل متوقف.';
-                    }
-                };
-
                 recognition.start();
+                startRecording();
             }
         }
-        
-        window.onload = generateRandomNumber;
 
+        function startRecording() {
+            isRecording = true;
+            const micBtn = document.getElementById('micBtn');
+            micBtn.classList.add('recording');
+            document.getElementById('status').textContent = '🎤 أتحدث الآن...';
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            const micBtn = document.getElementById('micBtn');
+            micBtn.classList.remove('recording');
+            document.getElementById('status').textContent = 'اضغطي على الميكرفون للبدء';
+        }
+
+        function processAnswer(studentAnswer) {
+            const correctAnswer = numberToArabicWords(currentNumber);
+            const resultSection = document.getElementById('resultSection');
+            const studentAnswerDiv = document.getElementById('studentAnswer');
+            const feedbackDiv = document.getElementById('feedback');
+
+            studentAnswerDiv.textContent = studentAnswer;
+            resultSection.style.display = 'block';
+
+            // مقارنة بسيطة للإجابات
+            const normalizedStudent = studentAnswer.replace(/\s+/g, ' ').trim().toLowerCase();
+            const normalizedCorrect = correctAnswer.replace(/\s+/g, ' ').trim().toLowerCase();
+
+            if (normalizedStudent.includes(normalizedCorrect) || normalizedCorrect.includes(normalizedStudent)) {
+                feedbackDiv.className = 'feedback correct';
+                feedbackDiv.innerHTML = '✅ أحسنت! قرأت الرقم بشكل صحيح 🌟';
+            } else {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.innerHTML = '❌ حاولي مرة أخرى 💪<br>القراءة الصحيحة: ' + correctAnswer;
+            }
+        }
+
+        function playCorrectAnswer() {
+            if (!currentNumber) return;
+
+            const correctAnswer = numberToArabicWords(currentNumber);
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(correctAnswer);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.8;
+                utterance.pitch = 1.2;
+                
+                // البحث عن صوت أنثوي عربي
+                const voices = speechSynthesis.getVoices();
+                const arabicFemaleVoice = voices.find(voice => 
+                    voice.lang.includes('ar') && voice.name.toLowerCase().includes('female')
+                ) || voices.find(voice => voice.lang.includes('ar'));
+                
+                if (arabicFemaleVoice) {
+                    utterance.voice = arabicFemaleVoice;
+                }
+                
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // تحديث العرض عند تغيير المدخل
+        document.getElementById('numberInput').addEventListener('input', updateNumberDisplay);
+
+        // تحميل الأصوات عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.getVoices();
+            }
+        });
+
+        // التأكد من تحميل الأصوات
+        if ('speechSynthesis' in window) {
+            speechSynthesis.addEventListener('voiceschanged', function() {
+                // الأصوات محملة الآن
+            });
+        }
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9900a658a0ecce18',t:'MTc2MDcxMzA2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
